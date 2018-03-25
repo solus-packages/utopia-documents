@@ -1,0 +1,22 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 4dbf220..26d5af9 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -308,14 +308,12 @@ elseif(OS_LINUX)
+ 
+     set(CMAKE_SKIP_BUILD_RPATH  FALSE)
+     set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
+-    set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib/utopia-documents/lib")
+-    set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+-    set(LIB_INSTALL_DIR "lib/utopia-documents/lib")
++    set(LIB_INSTALL_DIR "lib64")
+     set(BIN_INSTALL_DIR "bin")
+-    set(PLUGIN_INSTALL_DIR "lib/utopia-documents/plugins")
++    set(PLUGIN_INSTALL_DIR "lib64/utopia-documents/plugins")
+     set(RESOURCE_INSTALL_DIR "share/utopia-documents")
+     set(CMAKE_INSTALL_PREFIX "/usr" CACHE PATH "Install path prefix, prepended onto install directories.")
+-    set(PYTHON_INSTALL_DIR "lib/utopia-documents/python")
++    set(PYTHON_INSTALL_DIR ".")
+ elseif(OS_WINDOWS)
+     set(BUNDLE_CONTENTS_DIR ".")
+     set(LIB_INSTALL_DIR "bin")

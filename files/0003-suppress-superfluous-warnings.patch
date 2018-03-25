@@ -1,0 +1,17 @@
+diff --git a/python/utopia-plugins-core/utopia/plugins/core/metadata.py b/python/utopia-plugins-core/utopia/plugins/core/metadata.py
+index a9da5bf..795eaab 100644
+--- a/python/utopia-plugins-core/utopia/plugins/core/metadata.py
++++ b/python/utopia-plugins-core/utopia/plugins/core/metadata.py
+@@ -81,6 +81,12 @@ class Metadata(utopia.document.Annotator):
+             failures += 1
+ 
+             component = provenance.get('whence')
++
++            # Suppress the warnings on 'kend' and 'cited' since they show up
++            # for every document
++            if component in ['cited', 'kend']:
++                failures -= 1
++
+             plugin = provenance.get('plugin')
+             errors.setdefault(component, {})
+ 

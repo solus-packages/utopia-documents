@@ -1,0 +1,262 @@
+<PISI>
+    <Source>
+        <Name>utopia-documents</Name>
+        <Packager>
+            <Name>Longwu Ou</Name>
+            <Email>oulongwu@mit.edu</Email>
+        </Packager>
+        <License>GPL-3.0</License>
+        <PartOf>office.viewers</PartOf>
+        <Summary xml:lang="en">Utopia Documents is a free PDF reader that connects the static content of scientific articles to the dynamic world of online content.</Summary>
+        <Description xml:lang="en">Utopia Documents is a free PDF reader that connects the static content of scientific articles to the dynamic world of online content.
+</Description>
+        <Archive type="binary" sha1sum="79eb0752a961b8e0d15c77d298c97498fbc89c5a">https://solus-project.com/sources/README.Solus</Archive>
+    </Source>
+    <Package>
+        <Name>utopia-documents</Name>
+        <Summary xml:lang="en">Utopia Documents is a free PDF reader that connects the static content of scientific articles to the dynamic world of online content.</Summary>
+        <Description xml:lang="en">Utopia Documents is a free PDF reader that connects the static content of scientific articles to the dynamic world of online content.
+</Description>
+        <PartOf>office.viewers</PartOf>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/_spineapi.so</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/_utopiaauth.so</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/_utopiabridge.so</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/authd-0.3-py2.7.egg/EGG-INFO/PKG-INFO</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/authd-0.3-py2.7.egg/EGG-INFO/SOURCES.txt</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/authd-0.3-py2.7.egg/EGG-INFO/dependency_links.txt</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/authd-0.3-py2.7.egg/EGG-INFO/not-zip-safe</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/authd-0.3-py2.7.egg/EGG-INFO/requires.txt</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/authd-0.3-py2.7.egg/EGG-INFO/top_level.txt</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/authd-0.3-py2.7.egg/authd/__init__.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/authd-0.3-py2.7.egg/authd/client.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/authd-0.3-py2.7.egg/authd/converter/XML.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/authd-0.3-py2.7.egg/authd/converter/__init__.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/authd-0.3-py2.7.egg/authd/converter/base.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/authd-0.3-py2.7.egg/authd/model.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/coda_network.pth</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/coda_network/__init__.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/coda_network/connect.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/coda_network/httplib.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/coda_network/ntlm/U32.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/coda_network/ntlm/__init__.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/coda_network/ntlm/des.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/coda_network/ntlm/des_c.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/coda_network/ntlm/des_data.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/coda_network/ntlm/ntlm.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/coda_network/ntlm_auth.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/coda_network/oauth/__init__.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/coda_network/oauth_auth.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/coda_network/urllib2.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/coda_network/utilities.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/easy-install.pth</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/kend-0.7.1-py2.7.egg</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia-3.1.0.10-py2.7.egg/EGG-INFO/PKG-INFO</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia-3.1.0.10-py2.7.egg/EGG-INFO/SOURCES.txt</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia-3.1.0.10-py2.7.egg/EGG-INFO/dependency_links.txt</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia-3.1.0.10-py2.7.egg/EGG-INFO/not-zip-safe</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia-3.1.0.10-py2.7.egg/EGG-INFO/requires.txt</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia-3.1.0.10-py2.7.egg/EGG-INFO/top_level.txt</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia-3.1.0.10-py2.7.egg/utopia/__init__.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia-3.1.0.10-py2.7.egg/utopia/citation.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia-3.1.0.10-py2.7.egg/utopia/document.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia-3.1.0.10-py2.7.egg/utopia/extension.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia-3.1.0.10-py2.7.egg/utopia/library.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia-3.1.0.10-py2.7.egg/utopia/log.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia-3.1.0.10-py2.7.egg/utopia/parser.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia-3.1.0.10-py2.7.egg/utopia/plugins/__init__.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia-3.1.0.10-py2.7.egg/utopia/serializer.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia-3.1.0.10-py2.7.egg/utopia/tools/__init__.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_core-3.1.0.10-py2.7.egg/EGG-INFO/PKG-INFO</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_core-3.1.0.10-py2.7.egg/EGG-INFO/SOURCES.txt</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_core-3.1.0.10-py2.7.egg/EGG-INFO/dependency_links.txt</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_core-3.1.0.10-py2.7.egg/EGG-INFO/not-zip-safe</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_core-3.1.0.10-py2.7.egg/EGG-INFO/requires.txt</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_core-3.1.0.10-py2.7.egg/EGG-INFO/top_level.txt</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_core-3.1.0.10-py2.7.egg/utopia/tools/__init__.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_core-3.1.0.10-py2.7.egg/utopia/tools/converters/Annotation.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_core-3.1.0.10-py2.7.egg/utopia/tools/converters/Extent.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_core-3.1.0.10-py2.7.egg/utopia/tools/converters/PageBox.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_core-3.1.0.10-py2.7.egg/utopia/tools/converters/__init__.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_core-3.1.0.10-py2.7.egg/utopia/tools/utils.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_common-3.1.0.10-py2.7.egg/EGG-INFO/PKG-INFO</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_common-3.1.0.10-py2.7.egg/EGG-INFO/SOURCES.txt</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_common-3.1.0.10-py2.7.egg/EGG-INFO/dependency_links.txt</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_common-3.1.0.10-py2.7.egg/EGG-INFO/not-zip-safe</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_common-3.1.0.10-py2.7.egg/EGG-INFO/requires.txt</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_common-3.1.0.10-py2.7.egg/EGG-INFO/top_level.txt</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_common-3.1.0.10-py2.7.egg/utopia/plugins/__init__.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_common-3.1.0.10-py2.7.egg/utopia/plugins/common/acs.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_common-3.1.0.10-py2.7.egg/utopia/plugins/common/arxiv.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_common-3.1.0.10-py2.7.egg/utopia/plugins/common/cited.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_common-3.1.0.10-py2.7.egg/utopia/plugins/common/crossref.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_common-3.1.0.10-py2.7.egg/utopia/plugins/common/html.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_common-3.1.0.10-py2.7.egg/utopia/plugins/common/ieee.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_common-3.1.0.10-py2.7.egg/utopia/plugins/common/kend.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_common-3.1.0.10-py2.7.egg/utopia/plugins/common/nature.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_common-3.1.0.10-py2.7.egg/utopia/plugins/common/pmc.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_common-3.1.0.10-py2.7.egg/utopia/plugins/common/pubmed.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_common-3.1.0.10-py2.7.egg/utopia/plugins/common/sciencedirect.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_common-3.1.0.10-py2.7.egg/utopia/plugins/common/wiley.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/EGG-INFO/PKG-INFO</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/EGG-INFO/SOURCES.txt</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/EGG-INFO/dependency_links.txt</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/EGG-INFO/not-zip-safe</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/EGG-INFO/requires.txt</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/EGG-INFO/top_level.txt</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/__init__.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/Annotator3dmNG.zip/css/common.css</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/Annotator3dmNG.zip/css/protein.css</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/Annotator3dmNG.zip/git.log</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/Annotator3dmNG.zip/images/3dm-prefs-logo.png</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/Annotator3dmNG.zip/js/common.js</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/Annotator3dmNG.zip/js/libs/jquery.tablesorter.js</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/Annotator3dmNG.zip/js/protein.js</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/Annotator3dmNG.zip/python/Annotator3dmNG.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/altmetric.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/aspb.zip/images/aspb_logo.png</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/aspb.zip/images/gramene_db_logo.png</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/aspb.zip/images/kegg_db_logo.png</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/aspb.zip/images/nasc_db_logo.png</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/aspb.zip/images/pp_logo.png</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/aspb.zip/images/tair_db_logo.png</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/aspb.zip/images/tpc_logo.png</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/aspb.zip/python/aspb.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/biolookup.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/citation.zip/images/csl.png</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/citation.zip/python/citation.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/crossmark.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/definitionvisualiser.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/discussion.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/documentvisualiser.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/dryad.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/elife.zip/images/annotation_icon.png</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/elife.zip/images/logo.png</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/elife.zip/python/elife.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/figshare.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/genecards.zip/images/genecards.png</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/genecards.zip/python/genecards.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/geo.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/globalstore.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/google.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/gpcrdb.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/highwire.zip/python/highwire.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/hosted.zip/images/aspb_logo.png</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/hosted.zip/images/pp_logo.png</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/hosted.zip/images/tpc_logo.png</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/hosted.zip/python/hosted.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/hyperlinks.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/kendarticlesearch.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/lazarus.zip/images/lazarus-prefs-logo.png</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/lazarus.zip/images/pdf-page-icon.png</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/lazarus.zip/python/lazarus.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/lazarus.zip/tpl/config.html</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/lazarus.zip/tpl/denied.html</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/legacy.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/metadata.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/metadatafilter.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/nucleardb.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/openphacts.zip/images/openphacts.png</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/openphacts.zip/python/openphacts.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/overlays.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/peerj.zip/images/logo-large.png</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/peerj.zip/images/logo.png</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/peerj.zip/python/peerj.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/plos.zip/images/large_logo.jpg</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/plos.zip/images/small_logo.png</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/plos.zip/python/plos.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/pmc.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/portland.zip/images/biochemj.png</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/portland.zip/python/portland.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/pubmed.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/pubmedsearch.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/reflect.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/rsc.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/sciencewise.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/scraper.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/sherparomeo.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/springer.zip/images/annotation_icon.png</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/springer.zip/images/gigascience_logo.png</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/springer.zip/images/logo.png</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/springer.zip/python/springer.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_plugins_core-3.1.0.10-py2.7.egg/utopia/plugins/core/webphraselookup.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_tools-3.1.0.10-py2.7.egg/EGG-INFO/PKG-INFO</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_tools-3.1.0.10-py2.7.egg/EGG-INFO/SOURCES.txt</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_tools-3.1.0.10-py2.7.egg/EGG-INFO/dependency_links.txt</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_tools-3.1.0.10-py2.7.egg/EGG-INFO/not-zip-safe</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_tools-3.1.0.10-py2.7.egg/EGG-INFO/requires.txt</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_tools-3.1.0.10-py2.7.egg/EGG-INFO/top_level.txt</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_tools-3.1.0.10-py2.7.egg/utopia/tools/__init__.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_tools-3.1.0.10-py2.7.egg/utopia/tools/arxiv.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_tools-3.1.0.10-py2.7.egg/utopia/tools/cited.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_tools-3.1.0.10-py2.7.egg/utopia/tools/crossref.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_tools-3.1.0.10-py2.7.egg/utopia/tools/doi.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_tools-3.1.0.10-py2.7.egg/utopia/tools/eutils.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_tools-3.1.0.10-py2.7.egg/utopia/tools/nlm.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_tools-3.1.0.10-py2.7.egg/utopia/tools/pmc.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_tools-3.1.0.10-py2.7.egg/utopia/tools/provenance.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_tools-3.1.0.10-py2.7.egg/utopia/tools/pubmed.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/pyutopia_tools-3.1.0.10-py2.7.egg/utopia/tools/title.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/site.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/spineapi.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/spineapiPYTHON_wrap.c</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/utopiaauth.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/utopiaauthPYTHON_wrap.cxx</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/utopiabridge.py</Path>
+            <Path fileType="library">/usr/lib/python2.7/site-packages/utopiabridgePYTHON_wrap.cxx</Path>
+            <Path fileType="library">/usr/lib64/lib*.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libathenaeum-bibtex.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libathenaeum-pdf.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libpapyro-ambrosia.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libpapyro-cinema6.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libpapyro-crackle.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libpapyro-cslengineprefs.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libpapyro-graffiti.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libpapyro-lazarus.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libpapyro-reflect.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libpapyro-standard_factories.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libpapyro-tabling.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libutopia2-fasta.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libutopia2-legacy.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libutopia2-papyro.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libutopia2-pdb.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libutopia2-pdf.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libutopia2-pir.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libutopia2-python.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libutopia2-system.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libutopia2-update.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libutopia2-utopia.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libutopia2-w3.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libutopia2_auth-basic.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libutopia2_auth-manager.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libutopia2_auth_qt-preferences.so</Path>
+            <Path fileType="library">/usr/lib64/utopia-documents/plugins/libutopia2_qt-preferences.so</Path>
+            <Path fileType="data">/usr/share/applications/UtopiaDocuments.desktop</Path>
+            <Path fileType="data">/usr/share/icons/gnome/128x128/apps/UtopiaDocuments.png</Path>
+            <Path fileType="data">/usr/share/icons/gnome/16x16/apps/UtopiaDocuments.png</Path>
+            <Path fileType="data">/usr/share/icons/gnome/22x22/apps/UtopiaDocuments.png</Path>
+            <Path fileType="data">/usr/share/icons/gnome/24x24/apps/UtopiaDocuments.png</Path>
+            <Path fileType="data">/usr/share/icons/gnome/32x32/apps/UtopiaDocuments.png</Path>
+            <Path fileType="data">/usr/share/icons/gnome/48x48/apps/UtopiaDocuments.png</Path>
+            <Path fileType="data">/usr/share/icons/gnome/64x64/apps/UtopiaDocuments.png</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/128x128/apps/UtopiaDocuments.png</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/16x16/apps/UtopiaDocuments.png</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/22x22/apps/UtopiaDocuments.png</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/24x24/apps/UtopiaDocuments.png</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/32x32/apps/UtopiaDocuments.png</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/48x48/apps/UtopiaDocuments.png</Path>
+            <Path fileType="data">/usr/share/icons/hicolor/64x64/apps/UtopiaDocuments.png</Path>
+            <Path fileType="data">/usr/share/utopia-documents</Path>
+        </Files>
+    </Package>
+    <History>
+        <Update release="1">
+            <Date>2018-03-25</Date>
+            <Version>3.1</Version>
+            <Comment>Packaging update</Comment>
+            <Name>Longwu Ou</Name>
+            <Email>oulongwu@mit.edu</Email>
+        </Update>
+    </History>
+</PISI>

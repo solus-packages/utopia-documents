@@ -1,0 +1,231 @@
+The source code of utopia-documents uses an old api of the poppler library, which is not
+compatible with the version used in Solus. This commit modifies relevant functions in
+PDFDocument.cpp to use the more "modern" api of poppler.
+
+diff --git a/libcrackle/crackle/PDFDocument.cpp b/libcrackle/crackle/PDFDocument.cpp
+index 32031ba..a8cffa1 100644
+--- a/libcrackle/crackle/PDFDocument.cpp
++++ b/libcrackle/crackle/PDFDocument.cpp
+@@ -85,14 +85,11 @@ namespace {
+         Object obj, val;
+         string data;
+ 
+-        doc_->getDocInfo(&obj);
+-        if (obj.isDict() && obj.getDict()->lookup(const_cast<char *>(key_), &val)->isString()) {
++        obj = doc_->getDocInfo();
++        if (obj.isDict() && (val = obj.getDict()->lookup(const_cast<char *>(key_))).isString()) {
+             data=gstring2UnicodeString(val.getString());
+         }
+ 
+-        obj.free();
+-        val.free();
+-
+         return data;
+     }
+ 
+@@ -104,8 +101,8 @@ namespace {
+         struct tm tmStruct;
+         time_t res(0);
+ 
+-        doc_->getDocInfo(&obj);
+-        if (obj.isDict() && obj.getDict()->lookup(const_cast<char *>(key_), &val)->isString()) {
++        obj = doc_->getDocInfo();
++        if (obj.isDict() && (val = obj.getDict()->lookup(const_cast<char *>(key_))).isString()) {
+ 
+             s = val.getString()->getCString();
+ 
+@@ -134,8 +131,6 @@ namespace {
+                 res=mktime(&tmStruct);
+             }
+         }
+-        obj.free();
+-        val.free();
+         return res;
+     }
+ 
+@@ -303,12 +298,12 @@ void Crackle::PDFDocument::readBuffer(shared_array<char> data_, size_t length_)
+ 
+     // stream and file ownership is passed to PDFDoc
+     _dict=boost::shared_ptr<Object>(new Object);
+-    _dict->initNull();
++    _dict->setToNull();
+ 
+     _data=data_;
+     _datalen=length_;
+ 
+-    MemStream *stream=new MemStream(_data.get(), 0, _datalen, _dict.get());
++    MemStream *stream=new MemStream(_data.get(), 0, _datalen, std::move(*_dict.get()));
+     _open(stream);
+ 
+     Spine::Sha256 hash;
+@@ -330,10 +325,9 @@ std::string Crackle::PDFDocument::_addAnchor( Object *obj, std::string name)
+     if (obj->isArray()) {
+         dest = new LinkDest(obj->getArray());
+     } else if (obj->isDict()) {
+-        if (obj->dictLookup("D", &obj2)->isArray()) {
++        if ((obj2 = obj->dictLookup("D")).isArray()) {
+             dest = new LinkDest(obj2.getArray());
+         }
+-        obj2.free();
+     }
+ 
+     if (dest && dest->isOk()) {
+@@ -470,34 +464,30 @@ std::string Crackle::PDFDocument::_addAnchor(LinkDest * dest, std::string name)
+ void Crackle::PDFDocument::_updateNameTree(Object *tree)
+ {
+     if (tree->isDict()) {
+-        Object names, name;
+-        Object kids, kid;
+-        Object obj, obj2;
++        Object names;
++        Object kids;
+ 
+         // leaf node
+-        if (tree->dictLookup("Names", &names)->isArray()) {
++        if ((names = tree->dictLookup("Names")).isArray()) {
+             for (int i = 0; i < names.arrayGetLength(); i += 2) {
+-                if (names.arrayGet(i, &name)->isString()) {
++                Object name;
++                if ((name = names.arrayGet(i)).isString()) {
+                     string namestring(gstring2UnicodeString(name.getString()));
+-                    names.arrayGet(i+1, &obj);
++                    Object obj = names.arrayGet(i+1);
+                     _addAnchor(&obj, namestring);
+-                    obj.free();
+                 }
+-                name.free();
+             }
+         }
+-        names.free();
+ 
+         // root or intermediate node - process children
+-        if (tree->dictLookup("Kids", &kids)->isArray()) {
++        if ((kids = tree->dictLookup("Kids")).isArray()) {
+             for (int i = 0; i < kids.arrayGetLength(); ++i) {
+-                if (kids.arrayGet(i, &kid)->isDict()) {
++                Object kid;
++                if ((kid = kids.arrayGet(i)).isDict()) {
+                     _updateNameTree(&kid);
+                 }
+-                kid.free();
+             }
+         }
+-        kids.free();
+     }
+ }
+ 
+@@ -583,9 +573,7 @@ void Crackle::PDFDocument::_extractLinks()
+ #ifdef UTOPIA_SPINE_BACKEND_POPPLER
+         Links *links=new Links(catalog->getPage(page+1)->getAnnots());
+ #else // XPDF
+-        Object annotsObj;
+-        Links *links=new Links(catalog->getPage(page+1)->getAnnots(&annotsObj), catalog->getBaseURI());
+-        annotsObj.free();
++        Links *links=new Links(catalog->getPage(page+1)->getAnnots(), catalog->getBaseURI());
+ #endif
+ 
+         for (int i(0); i<links->getNumLinks(); ++i) {
+@@ -662,18 +650,15 @@ void Crackle::PDFDocument::_updateAnnotations()
+ 
+     // extract anchors from name tree
+     Object catDict;
+-    _doc->getXRef()->getCatalog(&catDict);
++    catDict = _doc->getXRef()->getCatalog();
+     if (catDict.isDict()) {
+       Object obj;
+-      if (catDict.dictLookup("Names", &obj)->isDict()) {
++      if ((obj = catDict.dictLookup("Names")).isDict()) {
+         Object nameTree;
+-        obj.dictLookup("Dests", &nameTree);
++        nameTree = obj.dictLookup("Dests");
+         _updateNameTree(&nameTree);
+-        nameTree.free();
+       }
+-      obj.free();
+     }
+-    catDict.free();
+ 
+ #else // XPDF
+ 
+@@ -691,9 +676,8 @@ void Crackle::PDFDocument::_updateAnnotations()
+         for (int i=0; i< dests->dictGetLength(); ++i) {
+             string namestring(dests->dictGetKey(i));
+             Object obj;
+-            dests->dictGetVal(i, &obj);
++            obj = dests->dictGetVal(i);
+             _addAnchor(&obj, namestring);
+-            obj.free();
+         }
+     }
+ 
+@@ -865,11 +849,11 @@ Crackle::PDFDocument::ViewMode Crackle::PDFDocument::viewMode()
+     XRef *xref(_doc->getXRef());
+     Object catDict;
+ 
+-    xref->getCatalog(&catDict);
++    catDict = xref->getCatalog();
+     if (catDict.isDict()) {
+         Object obj;
+ 
+-        if (catDict.dictLookup("PageMode", &obj)->isName()) {
++        if ((obj = catDict.dictLookup("PageMode")).isName()) {
+             if (obj.isName("UseNone"))
+                 // Neither document outline nor thumbnail images visible.
+                 res=ViewNone;
+@@ -889,9 +873,7 @@ Crackle::PDFDocument::ViewMode Crackle::PDFDocument::viewMode()
+                 // Attachments panel visible.
+                 res=ViewAttach;
+         }
+-        obj.free();
+     }
+-    catDict.free();
+ 
+     return res;
+ }
+@@ -905,10 +887,10 @@ Crackle::PDFDocument::PageLayout Crackle::PDFDocument::pageLayout()
+     XRef *xref(_doc->getXRef());
+     Object catDict;
+ 
+-    xref->getCatalog(&catDict);
++    catDict = xref->getCatalog();
+     if (catDict.isDict()) {
+         Object obj;
+-        if (catDict.dictLookup("PageLayout", &obj)->isName()) {
++        if ((obj = catDict.dictLookup("PageLayout")).isName()) {
+             if (obj.isName("SinglePage"))
+                 res=LayoutSinglePage;
+             if (obj.isName("OneColumn"))
+@@ -922,9 +904,7 @@ Crackle::PDFDocument::PageLayout Crackle::PDFDocument::pageLayout()
+             if (obj.isName("TwoPageRight"))
+                 res=LayoutTwoPageRight;
+         }
+-        obj.free();
+     }
+-    catDict.free();
+ 
+     return res;
+ }
+@@ -1055,11 +1035,11 @@ string Crackle::PDFDocument::pdfFileID()
+     _docid.clear();
+ 
+     Object fileIDArray;
+-    _doc->getXRef()->getTrailerDict()->dictLookup("ID", &fileIDArray);
++    fileIDArray = _doc->getXRef()->getTrailerDict()->dictLookup("ID");
+ 
+     if (fileIDArray.isArray()) {
+         Object fileIDObj0;
+-        if (fileIDArray.arrayGet(0, &fileIDObj0)->isString()) {
++        if ((fileIDObj0 = fileIDArray.arrayGet(0)).isString()) {
+ 
+             GString *str(fileIDObj0.getString());
+ 
+@@ -1073,9 +1053,7 @@ string Crackle::PDFDocument::pdfFileID()
+             }
+             _docid=Spine::Fingerprint::pdfFileIDFingerprintIri(s.str());;
+         }
+-        fileIDObj0.free();
+     }
+-    fileIDArray.free();
+ 
+     return _docid;
+ }

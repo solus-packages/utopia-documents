@@ -1,0 +1,4 @@
+0001-qt-version.patch -p1
+0002-use-system-poppler-api.patch -p1
+0003-suppress-superfluous-warnings.patch -p1
+0004-cmake-set-python-and-library-path.patch -p1

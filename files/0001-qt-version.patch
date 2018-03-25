@@ -1,0 +1,14 @@
+diff --git a/libutopia2_qt/utopia2/qt/bubble.h b/libutopia2_qt/utopia2/qt/bubble.h
+index 5fd3c57..13b5c5d 100644
+--- a/libutopia2_qt/utopia2/qt/bubble.h
++++ b/libutopia2_qt/utopia2/qt/bubble.h
+@@ -55,6 +55,9 @@
+ 
+ namespace Utopia
+ {
++#if QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
++    Q_NAMESPACE
++#endif
+ 
+     typedef enum
+     {
