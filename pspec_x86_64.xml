@@ -333,7 +333,7 @@
         </Files>
     </Package>
     <History>
-        <Update release="3">
+        <Update release="4">
             <Date>2018-10-26</Date>
             <Version>3.1</Version>
             <Comment>Packaging update</Comment>
