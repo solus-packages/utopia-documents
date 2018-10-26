@@ -2,8 +2,8 @@
     <Source>
         <Name>utopia-documents</Name>
         <Packager>
-            <Name>Pierre-Yves</Name>
-            <Email>pyu@riseup.net</Email>
+            <Name>Joey Riches</Name>
+            <Email>josephriches@gmail.com</Email>
         </Packager>
         <License>GPL-3.0</License>
         <PartOf>office.viewers</PartOf>
@@ -19,7 +19,7 @@
 </Description>
         <PartOf>office.viewers</PartOf>
         <Files>
-            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/bin/utopia-documents</Path>
             <Path fileType="library">/usr/lib/python2.7/site-packages/_spineapi.so</Path>
             <Path fileType="library">/usr/lib/python2.7/site-packages/_utopiaauth.so</Path>
             <Path fileType="library">/usr/lib/python2.7/site-packages/_utopiabridge.so</Path>
@@ -205,7 +205,16 @@
             <Path fileType="library">/usr/lib/python2.7/site-packages/utopiaauthPYTHON_wrap.cxx</Path>
             <Path fileType="library">/usr/lib/python2.7/site-packages/utopiabridge.py</Path>
             <Path fileType="library">/usr/lib/python2.7/site-packages/utopiabridgePYTHON_wrap.cxx</Path>
-            <Path fileType="library">/usr/lib64/lib*.so</Path>
+            <Path fileType="library">/usr/lib64/libathenaeum.so</Path>
+            <Path fileType="library">/usr/lib64/libcinema6.so</Path>
+            <Path fileType="library">/usr/lib64/libcrackle.so</Path>
+            <Path fileType="library">/usr/lib64/libgraffiti.so</Path>
+            <Path fileType="library">/usr/lib64/libpapyro.so</Path>
+            <Path fileType="library">/usr/lib64/libspine.so</Path>
+            <Path fileType="library">/usr/lib64/libutopia2.so</Path>
+            <Path fileType="library">/usr/lib64/libutopia2_auth.so</Path>
+            <Path fileType="library">/usr/lib64/libutopia2_auth_qt.so</Path>
+            <Path fileType="library">/usr/lib64/libutopia2_qt.so</Path>
             <Path fileType="library">/usr/lib64/utopia-documents/plugins/libathenaeum-bibtex.so</Path>
             <Path fileType="library">/usr/lib64/utopia-documents/plugins/libathenaeum-pdf.so</Path>
             <Path fileType="library">/usr/lib64/utopia-documents/plugins/libpapyro-ambrosia.so</Path>
@@ -247,16 +256,89 @@
             <Path fileType="data">/usr/share/icons/hicolor/32x32/apps/UtopiaDocuments.png</Path>
             <Path fileType="data">/usr/share/icons/hicolor/48x48/apps/UtopiaDocuments.png</Path>
             <Path fileType="data">/usr/share/icons/hicolor/64x64/apps/UtopiaDocuments.png</Path>
-            <Path fileType="data">/usr/share/utopia-documents</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/af-ZA.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/ar-AR.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/bg-BG.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/ca-AD.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/cs-CZ.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/da-DK.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/de-AT.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/de-CH.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/de-DE.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/el-GR.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/en-GB.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/en-US.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/es-CL.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/es-ES.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/et-EE.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/eu.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/fa-IR.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/fi-FI.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/fr-CA.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/fr-FR.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/he-IL.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/hr-HR.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/hu-HU.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/is-IS.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/it-IT.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/ja-JP.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/km-KH.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/ko-KR.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/lt-LT.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/lv-LV.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/mn-MN.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/nb-NO.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/nl-NL.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/nn-NO.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/pl-PL.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/pt-BR.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/pt-PT.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/ro-RO.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/ru-RU.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/sk-SK.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/sl-SI.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/sr-RS.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/sv-SE.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/th-TH.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/tr-TR.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/uk-UA.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/vi-VN.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/zh-CN.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/locales/zh-TW.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/styles/APA.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/styles/Chicago Fullnote Bibliography.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/styles/Harvard.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/styles/IEEE.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/styles/MLA.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/styles/NLM.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/styles/Nature.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/citeproc/styles/Vancouver.json</Path>
+            <Path fileType="data">/usr/share/utopia-documents/css/documents.css</Path>
+            <Path fileType="data">/usr/share/utopia-documents/css/library.css</Path>
+            <Path fileType="data">/usr/share/utopia-documents/css/molecules.css</Path>
+            <Path fileType="data">/usr/share/utopia-documents/css/sequences.css</Path>
+            <Path fileType="data">/usr/share/utopia-documents/css/utopia-macosx.css</Path>
+            <Path fileType="data">/usr/share/utopia-documents/css/utopia-win32.css</Path>
+            <Path fileType="data">/usr/share/utopia-documents/css/utopia.css</Path>
+            <Path fileType="data">/usr/share/utopia-documents/defaults.conf</Path>
+            <Path fileType="data">/usr/share/utopia-documents/mime/chemical</Path>
+            <Path fileType="data">/usr/share/utopia-documents/ontologies/bibo.nt</Path>
+            <Path fileType="data">/usr/share/utopia-documents/ontologies/mygrid.nt</Path>
+            <Path fileType="data">/usr/share/utopia-documents/ontologies/owl.nt</Path>
+            <Path fileType="data">/usr/share/utopia-documents/ontologies/rdf.nt</Path>
+            <Path fileType="data">/usr/share/utopia-documents/ontologies/rdfs.nt</Path>
+            <Path fileType="data">/usr/share/utopia-documents/ontologies/utopia_domain.nt</Path>
+            <Path fileType="data">/usr/share/utopia-documents/ontologies/utopia_system.nt</Path>
         </Files>
     </Package>
     <History>
-        <Update release="2">
-            <Date>2018-03-31</Date>
+        <Update release="3">
+            <Date>2018-10-26</Date>
             <Version>3.1</Version>
             <Comment>Packaging update</Comment>
-            <Name>Pierre-Yves</Name>
-            <Email>pyu@riseup.net</Email>
+            <Name>Joey Riches</Name>
+            <Email>josephriches@gmail.com</Email>
         </Update>
     </History>
 </PISI>

@@ -1,0 +1,11 @@
+--- a/libutopia2_qt/utopia2/qt/cache.h	2017-07-21 19:18:37.000000000 +0100
++++ b/libutopia2_qt/utopia2/qt/cache.h	2018-10-26 02:14:07.843078785 +0100
+@@ -334,7 +334,7 @@
+             if (!first) d->mutex.lock(); // Lock old shared mutex
+             boost::shared_ptr< CachePrivateClass > oldCache(d);
+             boost::shared_ptr< CachePrivateClass > newCache(CachePrivateClass::getCache(path));
+-            bool success = newCache;
++            bool success = newCache != 0;
+             if (success) newCache->mutex.lock(); // Lock new shared mutex
+             d = newCache;
+             if (!first) oldCache->mutex.unlock(); // Unlock old shared mutex
