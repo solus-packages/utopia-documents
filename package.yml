@@ -1,6 +1,6 @@
 name       : utopia-documents
 version    : 3.1
-release    : 4
+release    : 5
 source     :
     - http://utopiadocs.com/files/utopia-documents-3.1.0.tgz : e6db50a16d2ae53ce051217e6941c5796bf5b9d517b0623ab6ff0b617b04f365
 license    : GPL-3.0
@@ -24,6 +24,7 @@ rundeps    :
     - python-lxml
     - python-pillow
 setup      : |
+    cp $pkgfiles/GTypes.h $workdir/libcrackle/crackle/libpoppler-compat/goo/GTypes.h
     %apply_patches
 build      : |
     # Generate dependencies/dependencies.cmake which is required for cmake in main directory

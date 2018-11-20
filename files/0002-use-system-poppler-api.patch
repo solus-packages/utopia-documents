@@ -1,12 +1,232 @@
-The source code of utopia-documents uses an old api of the poppler library, which is not
-compatible with the version used in Solus. This commit modifies relevant functions in
-PDFDocument.cpp to use the more "modern" api of poppler.
-
+diff --git a/CMakeConfig/Modules/FindPoppler.cmake b/CMakeConfig/Modules/FindPoppler.cmake
+index f29d346..27ca29d 100644
+--- a/CMakeConfig/Modules/FindPoppler.cmake
++++ b/CMakeConfig/Modules/FindPoppler.cmake
+@@ -68,8 +68,13 @@ if(Poppler_INCLUDE_DIR AND Poppler_LIBRARY)
+   check_cxx_source_compiles(
+ "
+ #include <poppler/SplashOutputDev.h>
++#include <poppler/glib/poppler-features.h>
+ 
++#if POPPLER_CHECK_VERSION(0, 71, 0)
++typedef void (SplashOutputDev::*setVectorAntialiasFn)(bool aa);
++#else
+ typedef void (SplashOutputDev::*setVectorAntialiasFn)(GBool aa);
++#endif
+ 
+ int main(int argc, char** argv)
+ {
+@@ -81,8 +86,13 @@ int main(int argc, char** argv)
+   check_cxx_source_compiles(
+ "
+ #include <poppler/SplashOutputDev.h>
++#include <poppler/glib/poppler-features.h>
+ 
++#if POPPLER_CHECK_VERSION(0, 71, 0)
++typedef void (SplashOutputDev::*setFontAntialiasFn)(bool aa);
++#else
+ typedef void (SplashOutputDev::*setFontAntialiasFn)(GBool aa);
++#endif
+ 
+ int main(int argc, char** argv)
+ {
+diff --git a/libcrackle/crackle/CrackleFontInfo.h b/libcrackle/crackle/CrackleFontInfo.h
+index 61ee907..e96a99c 100644
+--- a/libcrackle/crackle/CrackleFontInfo.h
++++ b/libcrackle/crackle/CrackleFontInfo.h
+@@ -24,6 +24,8 @@
+ 
+ #include <map>
+ 
++#include "GTypes.h"
++
+ namespace Crackle
+ {
+ 
+diff --git a/libcrackle/crackle/CrackleTextOutputDev.cpp b/libcrackle/crackle/CrackleTextOutputDev.cpp
+index b9e3e95..261069a 100644
+--- a/libcrackle/crackle/CrackleTextOutputDev.cpp
++++ b/libcrackle/crackle/CrackleTextOutputDev.cpp
+@@ -55,14 +55,15 @@
+ #include "Link.h"
+ #include "Object.h"
+ #include "Stream.h"
+-
+-extern GBool unicodeTypeAlphaNum(Unicode c);
++#include "glib/poppler-features.h"
+ 
+ #include "CrackleTextOutputDev.h"
+ #include <crackle/ImageCollection.h>
+ #include <utf8/unicode.h>
+ #include <pcrecpp.h>
+ 
++extern GBool unicodeTypeAlphaNum(Unicode c);
++
+ #include <vector>
+ #include <algorithm>
+ 
+@@ -1821,7 +1822,11 @@ CrackleTextWordList::CrackleTextWordList(CrackleTextPage *text, GBool physLayout
+ 
+     if (text->rawOrder) {
+         for (word = text->rawWords; word; word = word->next) {
++#if POPPLER_CHECK_VERSION(0, 70, 0)
++            words->push_back(word);
++#else
+             words->append(word);
++#endif
+         }
+ 
+     } else if (physLayout) {
+@@ -1850,7 +1855,11 @@ CrackleTextWordList::CrackleTextWordList(CrackleTextPage *text, GBool physLayout
+         }
+         qsort(wordArray, nWords, sizeof(CrackleTextWord *), &CrackleTextWord::cmpYX);
+         for (i = 0; i < nWords; ++i) {
++#if POPPLER_CHECK_VERSION(0, 70, 0)
++            words->push_back(wordArray[i]);
++#else
+             words->append(wordArray[i]);
++#endif
+         }
+         gfree(wordArray);
+ 
+@@ -1859,7 +1868,11 @@ CrackleTextWordList::CrackleTextWordList(CrackleTextPage *text, GBool physLayout
+             for (blk = flow->blocks; blk; blk = blk->next) {
+                 for (line = blk->lines; line; line = line->next) {
+                     for (word = line->words; word; word = word->next) {
++#if POPPLER_CHECK_VERSION(0, 70, 0)
++                        words->push_back(word);
++#else
+                         words->append(word);
++#endif
+                     }
+                 }
+             }
+@@ -1928,8 +1941,13 @@ CrackleTextPage::~CrackleTextPage() {
+         }
+     }
+     delete fonts; // just delete list, do not delete the objects themselves
++#if POPPLER_CHECK_VERSION(0, 70, 0)
++    deleteGList<TextUnderline>(underlines);
++    deleteGList<TextLink>(links);
++#else
+     deleteGList(underlines, TextUnderline);
+     deleteGList(links, TextLink);
++#endif
+ }
+ 
+ void CrackleTextPage::startPage(GfxState *state) {
+@@ -1975,9 +1993,15 @@ void CrackleTextPage::clear() {
+         }
+         gfree(blocks);
+     }
++#if POPPLER_CHECK_VERSION(0, 70, 0)
++    deleteGList<CrackleTextFontInfo>(fonts);
++    deleteGList<TextUnderline>(underlines);
++    deleteGList<TextLink>(links);
++#else
+     deleteGList(fonts, CrackleTextFontInfo);
+     deleteGList(underlines, TextUnderline);
+     deleteGList(links, TextLink);
++#endif
+ 
+     curWord = NULL;
+     charPos = 0;
+@@ -2004,8 +2028,8 @@ void CrackleTextPage::clear() {
+ 
+ void CrackleTextPage::updateFont(GfxState *state) {
+     GfxFont *gfxFont;
+-    double *fm;
+-    char *name;
++    const double *fm;
++    const char *name;
+     int code, mCode, letterCode, anyCode;
+     double w;
+     int i;
+@@ -2021,7 +2045,11 @@ void CrackleTextPage::updateFont(GfxState *state) {
+     }
+     if (!curFont) {
+         curFont = new CrackleTextFontInfo(state);
++#if POPPLER_CHECK_VERSION(0, 70, 0)
++        fonts->push_back(curFont);
++#else
+         fonts->append(curFont);
++#endif
+ 
+         if (state->getFont()) {
+             // Store new font info for crackle use here since
+@@ -2082,7 +2110,7 @@ void CrackleTextPage::updateFont(GfxState *state) {
+ }
+ 
+ void CrackleTextPage::beginWord(GfxState *state, double x0, double y0) {
+-    double *fontm;
++    const double *fontm;
+     double m[4], m2[4];
+     int rot;
+ 
+@@ -2163,8 +2191,7 @@ void CrackleTextPage::addChar(GfxState *state, double x, double y,
+     }
+ 
+     // check the tiny chars limit
+-    if (!globalParams->getTextKeepTinyChars() &&
+-        fabs(w1) < 3 && fabs(h1) < 3) {
++    if (fabs(w1) < 3 && fabs(h1) < 3) {
+         if (++nTinyChars > 50000) {
+             charPos += nBytes;
+             return;
+@@ -2393,11 +2420,19 @@ void CrackleTextPage::addWord(CrackleTextWord *word) {
+ }
+ 
+ void CrackleTextPage::addUnderline(double x0, double y0, double x1, double y1) {
++#if POPPLER_CHECK_VERSION(0, 70, 0)
++    underlines->push_back(new TextUnderline(x0, y0, x1, y1));
++#else
+     underlines->append(new TextUnderline(x0, y0, x1, y1));
++#endif
+ }
+ 
+ void CrackleTextPage::addLink(int xMin, int yMin, int xMax, int yMax, Link *link) {
++#if POPPLER_CHECK_VERSION(0, 70, 0)
++    links->push_back(new TextLink(xMin, yMin, xMax, yMax, link));
++#else
+     links->append(new TextLink(xMin, yMin, xMax, yMax, link));
++#endif
+ }
+ 
+ void CrackleTextPage::coalesce(GBool physLayout, double fixedPitch, GBool doHTML) {
+@@ -4424,7 +4459,7 @@ void CrackleTextOutputDev::drawImage(GfxState *state, Object *ref, Stream *str,
+     size_t size;
+     Image::ImageType type;
+     char * data;
+-    double *ctm;
++    const double *ctm;
+     double mat[6];
+     bool rot;
+     double xScale, yScale;
+diff --git a/libcrackle/crackle/CrackleTextOutputDev.h b/libcrackle/crackle/CrackleTextOutputDev.h
+index 523ae8c..2fae593 100644
+--- a/libcrackle/crackle/CrackleTextOutputDev.h
++++ b/libcrackle/crackle/CrackleTextOutputDev.h
+@@ -58,6 +58,7 @@
+ #include "OutputDev.h"
+ #include "Page.h"
+ #include "Object.h"
++#include "GTypes.h"
+ 
+ #include <spine/BoundingBox.h>
+ #include <spine/Image.h>
 diff --git a/libcrackle/crackle/PDFDocument.cpp b/libcrackle/crackle/PDFDocument.cpp
-index 32031ba..a8cffa1 100644
+index 32031ba..fd7fadb 100644
 --- a/libcrackle/crackle/PDFDocument.cpp
 +++ b/libcrackle/crackle/PDFDocument.cpp
-@@ -85,14 +85,11 @@ namespace {
+@@ -53,6 +53,7 @@
+ #include "Outline.h"
+ #include "GList.h"
+ #include "Link.h"
++#include "glib/poppler-features.h"
+ 
+ #include <cwctype>
+ #include <algorithm>
+@@ -85,27 +86,24 @@ namespace {
          Object obj, val;
          string data;
  
@@ -23,7 +243,12 @@ index 32031ba..a8cffa1 100644
          return data;
      }
  
-@@ -104,8 +101,8 @@ namespace {
+     time_t getPDFInfoDate(boost::shared_ptr<PDFDoc> doc_, const char *key_)
+     {
+         Object obj,val;
+-        char *s;
++        const char *s;
+         int year, mon, day, hour, min, sec, n;
          struct tm tmStruct;
          time_t res(0);
  
@@ -34,7 +259,7 @@ index 32031ba..a8cffa1 100644
  
              s = val.getString()->getCString();
  
-@@ -134,8 +131,6 @@ namespace {
+@@ -134,8 +132,6 @@ namespace {
                  res=mktime(&tmStruct);
              }
          }
@@ -43,7 +268,7 @@ index 32031ba..a8cffa1 100644
          return res;
      }
  
-@@ -303,12 +298,12 @@ void Crackle::PDFDocument::readBuffer(shared_array<char> data_, size_t length_)
+@@ -303,12 +299,12 @@ void Crackle::PDFDocument::readBuffer(shared_array<char> data_, size_t length_)
  
      // stream and file ownership is passed to PDFDoc
      _dict=boost::shared_ptr<Object>(new Object);
@@ -58,7 +283,7 @@ index 32031ba..a8cffa1 100644
      _open(stream);
  
      Spine::Sha256 hash;
-@@ -330,10 +325,9 @@ std::string Crackle::PDFDocument::_addAnchor( Object *obj, std::string name)
+@@ -330,10 +326,9 @@ std::string Crackle::PDFDocument::_addAnchor( Object *obj, std::string name)
      if (obj->isArray()) {
          dest = new LinkDest(obj->getArray());
      } else if (obj->isDict()) {
@@ -70,7 +295,18 @@ index 32031ba..a8cffa1 100644
      }
  
      if (dest && dest->isOk()) {
-@@ -470,34 +464,30 @@ std::string Crackle::PDFDocument::_addAnchor(LinkDest * dest, std::string name)
+@@ -386,8 +381,9 @@ static Spine::BoundingBox rotateRect(Spine::BoundingBox rect, int rotation, cons
+     return rotated;
+ }
+ 
+-std::string Crackle::PDFDocument::_addAnchor(LinkDest * dest, std::string name)
++std::string Crackle::PDFDocument::_addAnchor(const LinkDest * dest1, std::string name)
+ {
++    LinkDest *dest = const_cast<LinkDest *>(dest1);
+     size_t page;
+     ostringstream anchorname;
+ 
+@@ -470,41 +466,38 @@ std::string Crackle::PDFDocument::_addAnchor(LinkDest * dest, std::string name)
  void Crackle::PDFDocument::_updateNameTree(Object *tree)
  {
      if (tree->isDict()) {
@@ -114,7 +350,36 @@ index 32031ba..a8cffa1 100644
      }
  }
  
-@@ -583,9 +573,7 @@ void Crackle::PDFDocument::_extractLinks()
+ /****************************************************************************/
+ 
+-void Crackle::PDFDocument::_extractOutline(GList *items, string prefix, UnicodeMap *uMap)
++void Crackle::PDFDocument::_extractOutline(const GList *items1, string prefix, UnicodeMap *uMap)
+ {
++    GList *items = const_cast<GList *>(items1);
+     char buf[8];
+ 
+     for (int i = 0; i < items->getLength(); ++i) {
+@@ -528,8 +521,8 @@ void Crackle::PDFDocument::_extractOutline(GList *items, string prefix, UnicodeM
+ 
+         if (item->getAction()->getKind()==actionGoTo || item->getAction()->getKind()==actionGoToR )
+         {
+-            LinkDest *dest(0);
+-            GString *namedDest(0);
++            const LinkDest *dest(0);
++            const GString *namedDest(0);
+             if (item->getAction()->getKind()==actionGoTo) {
+                 string anchor;
+ 
+@@ -562,7 +555,7 @@ void Crackle::PDFDocument::_extractOutline(GList *items, string prefix, UnicodeM
+ 
+         item->open();
+ 
+-        GList * kids;
++        const GList * kids;
+         if ((kids = item->getKids())) {
+             _extractOutline(kids, position.str(), uMap);
+         }
+@@ -583,9 +576,7 @@ void Crackle::PDFDocument::_extractLinks()
  #ifdef UTOPIA_SPINE_BACKEND_POPPLER
          Links *links=new Links(catalog->getPage(page+1)->getAnnots());
  #else // XPDF
@@ -125,7 +390,27 @@ index 32031ba..a8cffa1 100644
  #endif
  
          for (int i(0); i<links->getNumLinks(); ++i) {
-@@ -662,18 +650,15 @@ void Crackle::PDFDocument::_updateAnnotations()
+@@ -607,8 +598,8 @@ void Crackle::PDFDocument::_extractLinks()
+ 
+             if (action->getKind()==actionGoTo || action->getKind()==actionGoToR ) {
+ 
+-                LinkDest *dest(0);
+-                GString *namedDest(0);
++                const LinkDest *dest(0);
++                const GString *namedDest(0);
+                 if (action->getKind()==actionGoTo) {
+                     string anchor;
+ 
+@@ -637,7 +628,7 @@ void Crackle::PDFDocument::_extractLinks()
+             }
+ 
+             if (action->getKind()==actionURI ) {
+-                GString *uri;
++                const GString *uri;
+                 if ((uri = ((LinkURI *)action)->getURI())) {
+                     AnnotationHandle ann(new Annotation());
+                     ann->setProperty("concept", "Hyperlink");
+@@ -662,18 +653,15 @@ void Crackle::PDFDocument::_updateAnnotations()
  
      // extract anchors from name tree
      Object catDict;
@@ -147,7 +432,7 @@ index 32031ba..a8cffa1 100644
  
  #else // XPDF
  
-@@ -691,9 +676,8 @@ void Crackle::PDFDocument::_updateAnnotations()
+@@ -691,16 +679,19 @@ void Crackle::PDFDocument::_updateAnnotations()
          for (int i=0; i< dests->dictGetLength(); ++i) {
              string namestring(dests->dictGetKey(i));
              Object obj;
@@ -158,7 +443,18 @@ index 32031ba..a8cffa1 100644
          }
      }
  
-@@ -865,11 +849,11 @@ Crackle::PDFDocument::ViewMode Crackle::PDFDocument::viewMode()
+     // extract contents outline
+     Outline *outline(_doc->getOutline());
+     if(outline) {
++#if POPPLER_CHECK_VERSION(0, 64, 0)
++        const GList *items(outline->getItems());
++#else
+         GList *items(outline->getItems());
++#endif
+         if (items && items->getLength() > 0) {
+             GString *enc = new GString("Latin1");
+             UnicodeMap *uMap = globalParams->getUnicodeMap(enc);
+@@ -865,11 +856,11 @@ Crackle::PDFDocument::ViewMode Crackle::PDFDocument::viewMode()
      XRef *xref(_doc->getXRef());
      Object catDict;
  
@@ -172,7 +468,7 @@ index 32031ba..a8cffa1 100644
              if (obj.isName("UseNone"))
                  // Neither document outline nor thumbnail images visible.
                  res=ViewNone;
-@@ -889,9 +873,7 @@ Crackle::PDFDocument::ViewMode Crackle::PDFDocument::viewMode()
+@@ -889,9 +880,7 @@ Crackle::PDFDocument::ViewMode Crackle::PDFDocument::viewMode()
                  // Attachments panel visible.
                  res=ViewAttach;
          }
@@ -182,7 +478,7 @@ index 32031ba..a8cffa1 100644
  
      return res;
  }
-@@ -905,10 +887,10 @@ Crackle::PDFDocument::PageLayout Crackle::PDFDocument::pageLayout()
+@@ -905,10 +894,10 @@ Crackle::PDFDocument::PageLayout Crackle::PDFDocument::pageLayout()
      XRef *xref(_doc->getXRef());
      Object catDict;
  
@@ -195,7 +491,7 @@ index 32031ba..a8cffa1 100644
              if (obj.isName("SinglePage"))
                  res=LayoutSinglePage;
              if (obj.isName("OneColumn"))
-@@ -922,9 +904,7 @@ Crackle::PDFDocument::PageLayout Crackle::PDFDocument::pageLayout()
+@@ -922,9 +911,7 @@ Crackle::PDFDocument::PageLayout Crackle::PDFDocument::pageLayout()
              if (obj.isName("TwoPageRight"))
                  res=LayoutTwoPageRight;
          }
@@ -205,7 +501,16 @@ index 32031ba..a8cffa1 100644
  
      return res;
  }
-@@ -1055,11 +1035,11 @@ string Crackle::PDFDocument::pdfFileID()
+@@ -934,7 +921,7 @@ Crackle::PDFDocument::PageLayout Crackle::PDFDocument::pageLayout()
+ string Crackle::PDFDocument::metadata()
+ {
+     string result;
+-    GString *md(_doc->readMetadata());
++    const GString *md(_doc->readMetadata());
+     if(md) {
+         result=gstring2UnicodeString(md);
+     }
+@@ -1055,13 +1042,13 @@ string Crackle::PDFDocument::pdfFileID()
      _docid.clear();
  
      Object fileIDArray;
@@ -217,9 +522,12 @@ index 32031ba..a8cffa1 100644
 -        if (fileIDArray.arrayGet(0, &fileIDObj0)->isString()) {
 +        if ((fileIDObj0 = fileIDArray.arrayGet(0)).isString()) {
  
-             GString *str(fileIDObj0.getString());
+-            GString *str(fileIDObj0.getString());
++            const GString *str(fileIDObj0.getString());
  
-@@ -1073,9 +1053,7 @@ string Crackle::PDFDocument::pdfFileID()
+             ostringstream s;
+             s.setf (ios::hex, std::ios::basefield);
+@@ -1073,9 +1060,7 @@ string Crackle::PDFDocument::pdfFileID()
              }
              _docid=Spine::Fingerprint::pdfFileIDFingerprintIri(s.str());;
          }
@@ -229,3 +537,93 @@ index 32031ba..a8cffa1 100644
  
      return _docid;
  }
+diff --git a/libcrackle/crackle/PDFDocument.h b/libcrackle/crackle/PDFDocument.h
+index ce62d2a..8d2186d 100644
+--- a/libcrackle/crackle/PDFDocument.h
++++ b/libcrackle/crackle/PDFDocument.h
+@@ -267,9 +267,9 @@ namespace Crackle
+         void _open(BaseStream *stream_);
+ 
+         std::string _addAnchor(Object *obj, std::string name="");
+-        std::string _addAnchor(LinkDest *dest, std::string name="");
++        std::string _addAnchor(const LinkDest *dest1, std::string name="");
+         void _updateNameTree(Object *tree);
+-        void _extractOutline(GList *items, std::string label_prefix, UnicodeMap *uMap);
++        void _extractOutline(const GList *items1, std::string label_prefix, UnicodeMap *uMap);
+         void _extractLinks();
+ 
+         boost::shared_ptr<PDFDoc> _doc;
+diff --git a/libcrackle/crackle/PDFFont.cpp b/libcrackle/crackle/PDFFont.cpp
+index 91939db..6fa9cff 100644
+--- a/libcrackle/crackle/PDFFont.cpp
++++ b/libcrackle/crackle/PDFFont.cpp
+@@ -33,6 +33,7 @@
+ #include "aconf.h"
+ #include "goo/GString.h"
+ #include "GfxFont.h"
++#include "GTypes.h"
+ 
+ #include <cstring>
+ 
+@@ -58,7 +59,7 @@ PDFFont::PDFFont (GfxFont *gfxfont_, const FontSizes &sizes_)
+     :_sizes(sizes_)
+ {
+     // name
+-    GString *nm(gfxfont_->getName());
++    const GString *nm(gfxfont_->getName());
+ 
+     if(!nm) {
+         nm=gfxfont_->getEmbeddedFontName();
+@@ -74,7 +75,7 @@ PDFFont::PDFFont (GfxFont *gfxfont_, const FontSizes &sizes_)
+ 
+     // tag
+ 
+-    GString *tag(gfxfont_->getTag());
++    const GString *tag(gfxfont_->getTag());
+     if(tag) {
+         _tag=gstring2UnicodeString(tag);
+     }
+diff --git a/libcrackle/crackle/PDFPage.cpp b/libcrackle/crackle/PDFPage.cpp
+index 5862d73..50e7470 100644
+--- a/libcrackle/crackle/PDFPage.cpp
++++ b/libcrackle/crackle/PDFPage.cpp
+@@ -103,7 +103,7 @@ int Crackle::PDFPage::pageNumber() const
+ BoundingBox Crackle::PDFPage::boundingBox() const
+ {
+     int rotate = _doc->xpdfDoc()->getCatalog()->getPage(_page)->getRotate();
+-    PDFRectangle *rect=_doc->xpdfDoc()->getCatalog()->getPage(_page)->getCropBox();
++    const PDFRectangle *rect=_doc->xpdfDoc()->getCatalog()->getPage(_page)->getCropBox();
+     //PDFRectangle *rect=_doc->xpdfDoc()->getCatalog()->getPage(_page)->getTrimBox();
+     if (rotate % 180 == 0) { // No change to rectangle
+         return BoundingBox(rect->x1, rect->y1, rect->x2, rect->y2);
+@@ -140,7 +140,7 @@ BoundingBox Crackle::PDFPage::boundingBox() const
+ 
+ Spine::BoundingBox Crackle::PDFPage::mediaBox() const
+ {
+-    PDFRectangle *rect=_doc->xpdfDoc()->getCatalog()->getPage(_page)->getMediaBox();
++    const PDFRectangle *rect=_doc->xpdfDoc()->getCatalog()->getPage(_page)->getMediaBox();
+     return BoundingBox(rect->x1, rect->y1, rect->x2, rect->y2);
+ }
+ 
+@@ -274,7 +274,7 @@ void Crackle::PDFPage::_extractTextAndImages() const
+         double w(_doc->xpdfDoc()->getPageMediaWidth(_page));
+         double h(_doc->xpdfDoc()->getPageMediaHeight(_page));
+ 
+-        PDFRectangle *rect=_doc->xpdfDoc()->getCatalog()->getPage(_page)->getMediaBox();
++        const PDFRectangle *rect=_doc->xpdfDoc()->getCatalog()->getPage(_page)->getMediaBox();
+ 
+         double resolution_w = (72.0 * (rect->x2-rect->x1)) / w;
+         double resolution_h = (72.0 * (rect->y2-rect->y1)) / h;
+diff --git a/libcrackle/crackle/xpdfapi.h b/libcrackle/crackle/xpdfapi.h
+index f7863db..2f205a3 100644
+--- a/libcrackle/crackle/xpdfapi.h
++++ b/libcrackle/crackle/xpdfapi.h
+@@ -38,7 +38,7 @@
+ 
+ namespace Crackle {
+ 
+-    inline std::string gstring2UnicodeString(GString *str_)
++    inline std::string gstring2UnicodeString(const GString *str_)
+     {
+         uint16_t u;
+         std::string result;
