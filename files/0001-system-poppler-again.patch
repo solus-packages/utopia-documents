@@ -1,0 +1,80 @@
+From c4494999475fb98bd31f234c626cd28904012f31 Mon Sep 17 00:00:00 2001
+From: Joey Riches <josephriches@gmail.com>
+Date: Tue, 16 Jul 2019 22:36:36 +0100
+Subject: [PATCH 1/1] system poppler again
+
+Signed-off-by: Joey Riches <josephriches@gmail.com>
+---
+ libcrackle/crackle/CrackleTextOutputDev.cpp | 8 ++++----
+ libcrackle/crackle/CrackleTextOutputDev.h   | 1 -
+ libcrackle/crackle/PDFDocument.cpp          | 2 +-
+ 3 files changed, 5 insertions(+), 6 deletions(-)
+
+diff --git a/libcrackle/crackle/CrackleTextOutputDev.cpp b/libcrackle/crackle/CrackleTextOutputDev.cpp
+index 261069a..a677a89 100644
+--- a/libcrackle/crackle/CrackleTextOutputDev.cpp
++++ b/libcrackle/crackle/CrackleTextOutputDev.cpp
+@@ -4018,7 +4018,7 @@ void CrackleTextPage::dump(void *outputStream, TextOutputFunc outputFunc,
+         for (word = rawWords; word; word = word->next) {
+             s = new GString();
+             dumpFragment(word->text, word->len, uMap, s);
+-            (*outputFunc)(outputStream, s->getCString(), s->getLength());
++            (*outputFunc)(outputStream, s->c_str(), s->getLength());
+             delete s;
+             if (word->next &&
+                 fabs(word->next->base - word->base) <
+@@ -4092,7 +4092,7 @@ void CrackleTextPage::dump(void *outputStream, TextOutputFunc outputFunc,
+             // print the line
+             s = new GString();
+             col += dumpFragment(frag->line->text + frag->start, frag->len, uMap, s);
+-            (*outputFunc)(outputStream, s->getCString(), s->getLength());
++            (*outputFunc)(outputStream, s->c_str(), s->getLength());
+             delete s;
+ 
+             // print one or more returns if necessary
+@@ -4131,7 +4131,7 @@ void CrackleTextPage::dump(void *outputStream, TextOutputFunc outputFunc,
+                     }
+                     s = new GString();
+                     dumpFragment(line->text, n, uMap, s);
+-                    (*outputFunc)(outputStream, s->getCString(), s->getLength());
++                    (*outputFunc)(outputStream, s->c_str(), s->getLength());
+                     delete s;
+                     if (!line->hyphenated) {
+                         if (line->next) {
+@@ -4550,7 +4550,7 @@ void CrackleTextOutputDev::drawImage(GfxState *state, Object *ref, Stream *str,
+         for (size_t y = 0; y < static_cast<size_t>(height); ++y) {
+ 
+             // write the line
+-            Guchar *p = imgStr->getLine();
++            unsigned char *p = imgStr->getLine();
+             for (size_t x = 0; x < static_cast<size_t>(width); ++x) {
+                 colorMap->getRGB(p, &rgb);
+                 data[i++]=colToByte(rgb.r);
+diff --git a/libcrackle/crackle/CrackleTextOutputDev.h b/libcrackle/crackle/CrackleTextOutputDev.h
+index 2fae593..c4041d2 100644
+--- a/libcrackle/crackle/CrackleTextOutputDev.h
++++ b/libcrackle/crackle/CrackleTextOutputDev.h
+@@ -51,7 +51,6 @@
+ #endif
+ 
+ #include <stdio.h>
+-#include "gtypes.h"
+ #include <GString.h>
+ #include <GList.h>
+ #include "GfxFont.h"
+diff --git a/libcrackle/crackle/PDFDocument.cpp b/libcrackle/crackle/PDFDocument.cpp
+index fd7fadb..df28b8a 100644
+--- a/libcrackle/crackle/PDFDocument.cpp
++++ b/libcrackle/crackle/PDFDocument.cpp
+@@ -105,7 +105,7 @@ namespace {
+         obj = doc_->getDocInfo();
+         if (obj.isDict() && (val = obj.getDict()->lookup(const_cast<char *>(key_))).isString()) {
+ 
+-            s = val.getString()->getCString();
++            s = val.getString()->c_str();
+ 
+             if (s[0] == 'D' && s[1] == ':') {
+                 s += 2;
+-- 
+2.22.0
+

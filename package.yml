@@ -1,6 +1,6 @@
 name       : utopia-documents
 version    : 3.1
-release    : 5
+release    : 6
 source     :
     - http://utopiadocs.com/files/utopia-documents-3.1.0.tgz : e6db50a16d2ae53ce051217e6941c5796bf5b9d517b0623ab6ff0b617b04f365
 license    : GPL-3.0
